@@ -1,0 +1,100 @@
+---
+import { fetchAlbumPhotos } from '@api/albums';
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Album from "@components/Album.astro";
+
+interface Props {
+    album: CollectionEntry<'albums'>
+}
+
+export async function getStaticPaths() {
+    const albums = await getCollection('albums');
+    return albums.map(album => ({
+        params: {slug: album.data.slug},
+        props: {album},
+    }));
+}
+
+const { album } = Astro.props;
+const photos: Photo[] = await fetchAlbumPhotos(album.id);
+---
+
+
+<Layout pageTitle={album.data.name}>
+
+    <Album parentId={album.data.id}/>
+
+    {photos && (
+        <div data-album-id={album.id} id="gallery" class="grid gap-0.5 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {photos.map((photo: Photo) => (
+
+                <a href={photo.element_url} data-download={photo.download_url} class="block"
+                   data-pswp-srcset={Object.entries(photo.derivatives).map(([_, {url, width}]) => (`${url} ${width}w`)).join(', ')}
+                   data-pswp-sizes={Object.entries(photo.derivatives).map(([_, {width}]) => (`(min-width: ${width}px) ${width}px`)).join(', ')}
+                   data-pswp-width={photo.derivatives.xxlarge.width}
+                   data-pswp-height={photo.derivatives.xxlarge.height}
+                >
+                    <img loading="lazy"
+                            alt={`Love Explosion Festival ${photo.name}`}
+                            title={`Love Explosion Festival ${photo.name}`}
+                            class="aspect-square object-cover w-full h-auto bg-stone-800"
+                            height={photo.derivatives.medium.height}
+                            width={photo.derivatives.medium.width}
+                            srcset={Object.entries(photo.derivatives).map(([_, {url, width}]) => (`${url} ${width}w`)).join(', ')}
+                            sizes=" (min-width:1440px) 450px, (min-width:768px) 350px, 50vw "
+                            src={photo.derivatives.square.url}
+                    >
+                </a>
+
+            ))}
+        </div>
+    )}
+
+</Layout>
+
+
+<script>
+
+    /**
+     * Integration of Photoswipe by Dmytro Semenov
+     * https://github.com/dimsemenov/PhotoSwipe
+     */
+
+    import PhotoSwipeLightbox from 'photoswipe/lightbox';
+    import 'photoswipe/style.css';
+
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '#gallery',
+        children: 'a',
+        wheelToZoom: true,
+        pswpModule: () => import('photoswipe')
+    });
+    lightbox.on('uiRegister', function () {
+        lightbox.pswp?.ui?.registerElement({
+            name: 'download-button',
+            order: 8,
+            isButton: true,
+            tagName: 'a',
+
+            // SVG with outline
+            html: {
+                isCustomSVG: true,
+                inner: '<path d="M20.5 14.3 17.1 18V10h-2.2v7.9l-3.4-3.6L10 16l6 6.1 6-6.1ZM23 23H9v2h14Z" id="pswp__icn-download"/>',
+                outlineID: 'pswp__icn-download'
+            },
+
+            onInit: (el, pswp) => {
+                el.setAttribute('download', '');
+                el.setAttribute('aria-label', 'download');
+                el.setAttribute('target', '_blank');
+                el.setAttribute('rel', 'noopener');
+
+                pswp.on('change', () => {
+                    el.setAttribute('href', pswp.currSlide?.data.element?.dataset.download ?? '')
+                });
+            }
+        });
+    });
+    lightbox.init();
+</script>

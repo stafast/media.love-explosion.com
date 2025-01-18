@@ -1,0 +1,112 @@
+---
+import {BASE_URL} from "astro:env/server";
+import unboundedWoff2 from '@fontsource-variable/unbounded/files/unbounded-latin-wght-normal.woff2?url';
+import '@fontsource-variable/unbounded';
+import Logo from "@components/Logo.astro";
+
+interface Props {
+    pageTitle?: string
+}
+
+const {pageTitle} = Astro.props;
+
+const appTitle:string = 'Love Explosion Media';
+const appDescription: string = 'Entdecke die Highlights des Love Explosion Festivals in unserer Foto-Galerie! Erlebe magische Momente, atemberaubende Bühnen und die unvergessliche Stimmung des Events. Jetzt reinschauen!';
+
+const title: string = pageTitle ? `${pageTitle} | ${appTitle}` : appTitle;
+const description: string = appDescription;
+
+---
+<!doctype html>
+<html lang="de" class="m-0 h-full w-full scroll-smooth">
+<head>
+    <link rel="preload" as="font" type="font/woff2" href={unboundedWoff2} crossorigin="anonymous" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="generator" content={Astro.generator}/>
+
+    <title>{title}</title>
+
+    <meta name="description" content={description}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={`${BASE_URL}/og.jpg`}>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Love Explosion Media">
+</head>
+<body class="m-0 h-full w-full bg-stone-950 text-stone-100 antialiased selection:text-white selection:bg-[#ff6182]">
+<header>
+    <div class="container flex items-center justify-between pt-4 pb-8">
+        <div class="logo overflow-hidden">
+            <a href="https://love-explosion.com" class="inline-block ml-[-17px]">
+                <Logo/>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="/" class="p-3 lg:text-lg">Alle Alben</a>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <slot/>
+    </div>
+</main>
+<footer>
+    <div class="container pt-16 pb-12 text-center">
+        <div class="flex gap-8 mb-6 justify-center text-sm">
+            <a href="https://love-explosion.com/datenschutz" title="Datenschutz">Datenschutz</a>
+            <a href="https://love-explosion.com/impressum" title="Impressum">Impressum</a>
+        </div>
+
+        <a title="André Stafast – Software-Entwickler" href="https://www.stafast.net" target="_blank" class="text-xs">Made with ♥ by <span class="font-medium">Sanjo</span></a>
+    </div>
+</footer>
+<div class="scroll-up--container fixed bottom-5 left-5 hidden">
+    <button class="bg-stone-100 text-2xl aspect-square w-[30px] text-center text-stone-900 rounded-full flex items-center justify-center w-[45px] h-[45px] font-light" aria-label="Zurück nach oben" onclick="window.scrollTo({top: 0})">&#8593;</button>
+</div>
+
+<script type="text/partytown">
+    /* eslint-disable */
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setCookieDomain", "*.love-explosion.com"]);
+      _paq.push(["setDomains", ["*.love-explosion.com"]]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//matomo.love-explosion.com/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '2']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    /* eslint-enable */
+</script>
+
+</body>
+</html>
+
+<style is:global>
+    a {
+        @apply hover:text-[#ff6182]
+    }
+</style>
+<script>
+
+    const scrollUpContainer: HTMLElement | null = document.querySelector('.scroll-up--container');
+
+    function scrollUpButton(): void {
+        const scrolled: number = window.scrollY;
+
+        if(scrollUpContainer) {
+        if(scrolled > window.innerHeight) {
+            scrollUpContainer.classList.remove('hidden')
+        } else {
+            scrollUpContainer.classList.add('hidden')
+        }
+        }
+    }
+
+    window.addEventListener('scroll', scrollUpButton)
+</script>
