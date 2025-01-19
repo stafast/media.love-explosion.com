@@ -62,11 +62,16 @@ const description: string = appDescription;
         <a title="André Stafast – Software-Entwickler" href="https://www.stafast.net" target="_blank" class="text-xs">Made with ♥ by <span class="font-medium">Sanjo</span></a>
     </div>
 </footer>
-<div class="scroll-up--container fixed bottom-5 left-5 hidden">
-    <button class="bg-stone-100 text-2xl aspect-square w-[30px] text-center text-stone-900 rounded-full flex items-center justify-center w-[45px] h-[45px] font-light" aria-label="Zurück nach oben" onclick="window.scrollTo({top: 0})">&#8593;</button>
+<div class="scroll-up--container fixed bottom-[5dvh] right-5 hidden">
+    <button class="flex items-center justify-center aspect-square
+    w-[45px] h-[45px] rounded-full
+    bg-stone-100 text-stone-900 text-2xl text-center font-light opacity-90
+    drop-shadow-lg"
+            aria-label="Zurück nach oben" onclick="window.scrollTo({top: 0})">&#8593;</button>
 </div>
 
-<script defer is:inline type="text/javascript">
+
+<script type="text/partytown">
     /* eslint-disable */
       var _paq = window._paq = window._paq || [];
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -100,7 +105,7 @@ const description: string = appDescription;
         const scrolled: number = window.scrollY;
 
         if(scrollUpContainer) {
-        if(scrolled > window.innerHeight) {
+        if(scrolled > (window.innerHeight * 0.7)) {
             scrollUpContainer.classList.remove('hidden')
         } else {
             scrollUpContainer.classList.add('hidden')
