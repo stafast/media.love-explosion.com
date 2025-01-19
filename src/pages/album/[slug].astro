@@ -38,7 +38,7 @@ const photos: Photo[] = await fetchAlbumPhotos(album.id);
                     <img loading="lazy"
                             alt={`Love Explosion Festival ${photo.name}`}
                             title={`Love Explosion Festival ${photo.name}`}
-                            class="aspect-square object-cover w-full h-auto bg-stone-800"
+                            class="aspect-[4/5] object-cover w-full h-auto bg-stone-800"
                             height={photo.derivatives.medium.height}
                             width={photo.derivatives.medium.width}
                             srcset={Object.entries(photo.derivatives).map(([_, {url, width}]) => (`${url} ${width}w`)).join(', ')}

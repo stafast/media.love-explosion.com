@@ -26,7 +26,7 @@ const subAlbums: CollectionEntry<'albums'>[] | false = getAlbumByParentId(parent
                             <a href={`/album/${album.data.slug}/`} class="block relative hover:text-stone-200">
 
                                 <img loading="lazy" src={album.data.thumbnail} alt={album.data.name}
-                                     class="aspect-square object-cover w-full h-auto bg-stone-800">
+                                     class="aspect-[4/5] object-cover w-full h-auto bg-stone-800">
                                 <div class="absolute inset-0 p-2 content-center bg-[#00000085] hover:bg-[#00000095] text-sm lg:text-lg text-center font-medium shadow">{album.data.name}</div>
                             </a>
                     ))}
