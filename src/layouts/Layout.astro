@@ -25,9 +25,7 @@ const description: string = appDescription;
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta name="generator" content={Astro.generator}/>
-
     <title>{title}</title>
-
     <meta name="description" content={description}>
     <meta property="og:description" content={description}>
     <meta property="og:image" content={`${BASE_URL}/og.jpg`}>
@@ -35,60 +33,57 @@ const description: string = appDescription;
     <meta property="og:site_name" content="Love Explosion Media">
 </head>
 <body class="m-0 h-full w-full bg-stone-950 text-stone-100 antialiased selection:text-white selection:bg-[#ff6182]">
-<header>
-    <div class="container flex items-center justify-between pt-4 pb-4 lg:pb-8">
-        <div class="logo overflow-hidden">
-            <a href="https://love-explosion.com" class="inline-block ml-[-17px]">
-                <Logo/>
-            </a>
+    <header>
+        <div class="container flex items-center justify-between pt-4 pb-4 lg:pb-8">
+            <div class="logo overflow-hidden">
+                <a href="https://love-explosion.com" class="inline-block ml-[-17px]">
+                    <Logo/>
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="/" class="p-3 lg:text-lg">Alle Alben</a>
+            </nav>
         </div>
-        <nav class="nav">
-            <a href="/" class="p-3 lg:text-lg">Alle Alben</a>
-        </nav>
-    </div>
-</header>
-<main>
-    <div class="container">
-        <slot/>
-    </div>
-</main>
-<footer>
-    <div class="container pt-16 pb-12 text-center">
-        <div class="flex gap-8 mb-6 justify-center text-sm">
-            <a href="https://love-explosion.com/datenschutz" title="Datenschutz">Datenschutz</a>
-            <a href="https://love-explosion.com/impressum" title="Impressum">Impressum</a>
+    </header>
+    <main>
+        <div class="container">
+            <slot/>
         </div>
+    </main>
+    <footer>
+        <div class="container pt-16 pb-12 text-center">
+            <div class="flex gap-8 mb-6 justify-center text-sm">
+                <a href="https://love-explosion.com/datenschutz" title="Datenschutz">Datenschutz</a>
+                <a href="https://love-explosion.com/impressum" title="Impressum">Impressum</a>
+            </div>
 
-        <a title="André Stafast – Software-Entwickler" href="https://www.stafast.net" target="_blank" class="text-xs">Made with ♥ by <span class="font-medium">Sanjo</span></a>
+            <a title="André Stafast – Software-Entwickler" href="https://www.stafast.net" target="_blank" class="text-xs">Made with ♥ by <span class="font-medium">Sanjo</span></a>
+        </div>
+    </footer>
+    <div class="scroll-up--container fixed bottom-[5dvh] right-5 hidden">
+        <button class="flex items-center justify-center aspect-square
+        w-[45px] h-[45px] rounded-full
+        bg-stone-100 text-stone-900 text-2xl text-center font-light opacity-90
+        drop-shadow-lg"
+                aria-label="Zurück nach oben" onclick="window.scrollTo({top: 0})">&#8593;</button>
     </div>
-</footer>
-<div class="scroll-up--container fixed bottom-[5dvh] right-5 hidden">
-    <button class="flex items-center justify-center aspect-square
-    w-[45px] h-[45px] rounded-full
-    bg-stone-100 text-stone-900 text-2xl text-center font-light opacity-90
-    drop-shadow-lg"
-            aria-label="Zurück nach oben" onclick="window.scrollTo({top: 0})">&#8593;</button>
-</div>
-
-
-<script defer is:inline type="text/javascript">
-    /* eslint-disable */
-      var _paq = window._paq = window._paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(["setCookieDomain", "*.love-explosion.com"]);
-      _paq.push(["setDomains", ["*.love-explosion.com"]]);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u="//matomo.love-explosion.com/";
-        _paq.push(['setTrackerUrl', u+'matomo.php']);
-        _paq.push(['setSiteId', '2']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-      })();
-    /* eslint-enable */
-</script>
-
+    <script defer is:inline type="text/javascript">
+        /* eslint-disable */
+          var _paq = window._paq = window._paq || [];
+          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+          _paq.push(["setCookieDomain", "*.love-explosion.com"]);
+          _paq.push(["setDomains", ["*.love-explosion.com"]]);
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="//matomo.love-explosion.com/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '2']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+          })();
+        /* eslint-enable */
+    </script>
 </body>
 </html>
 
@@ -98,9 +93,7 @@ const description: string = appDescription;
     }
 </style>
 <script>
-
     const scrollUpContainer: HTMLElement | null = document.querySelector('.scroll-up--container');
-
     function scrollUpButton(): void {
         const scrolled: number = window.scrollY;
 
@@ -112,6 +105,5 @@ const description: string = appDescription;
         }
         }
     }
-
     window.addEventListener('scroll', scrollUpButton)
 </script>
