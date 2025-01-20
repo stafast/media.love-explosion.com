@@ -28,7 +28,7 @@ const photos: Photo[] = await fetchAlbumPhotos(album.id);
 
     {photos && (
             <div data-album-id={album.id} id="gallery" class="grid gap-0.5 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {photos.map((photo: Photo) => (
+                {photos.map((photo: Photo, index) => (
 
                         <a href={photo.element_url} data-download={photo.download_url} class="block"
                            data-pswp-srcset={Object.entries(photo.derivatives).map(([_, {
@@ -39,8 +39,8 @@ const photos: Photo[] = await fetchAlbumPhotos(album.id);
                            data-pswp-width={photo.derivatives.xxlarge.width}
                            data-pswp-height={photo.derivatives.xxlarge.height}
                         >
-
                             <Image
+                                    fetchpriority={index < 9 ? 'high' : 'auto'}
                                     alt={`Love Explosion Festival ${photo.name}`}
                                     title={`Love Explosion Festival ${photo.name}`}
                                     class="aspect-[4/5] object-cover w-full h-auto bg-stone-800"
