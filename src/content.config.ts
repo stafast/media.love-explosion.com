@@ -51,7 +51,7 @@ const albums = defineCollection({
         slug: z.string(),
         name: z.string(),
         parentId: z.union([z.string(), z.null()]),
-        thumbnail: z.string().url(),
+        thumbnail: z.string(),
         published: z.coerce.date()
     })
 })

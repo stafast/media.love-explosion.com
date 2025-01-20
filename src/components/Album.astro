@@ -1,5 +1,6 @@
 ---
 import {type CollectionEntry, getCollection} from "astro:content";
+import { Image } from 'astro:assets';
 
 interface Props {
     parentId: string | null,
@@ -23,10 +24,9 @@ const subAlbums: CollectionEntry<'albums'>[] | false = getAlbumByParentId(parent
                         .sort((a, b) => b.data.name.localeCompare(a.data.name))
                         .map((album: CollectionEntry<'albums'>) => (
 
-                            <a href={`/album/${album.data.slug}/`} class="block relative hover:text-stone-200">
-
-                                <img loading="lazy" src={album.data.thumbnail} alt={album.data.name}
-                                     class="aspect-[4/5] object-cover w-full h-auto bg-stone-800">
+                            <a title={`Gehe zum Albumfoto ${album.data.name} von der Love Explosion`} href={`/album/${album.data.slug}/`} class="block relative hover:text-stone-200">
+                                <Image src={album.data.thumbnail} alt={`Thumbnail vom Album ${album.data.name}`} width={1008} height={671}
+                                       class="aspect-[4/5] object-cover w-full h-auto bg-stone-800"/>
                                 <div class="absolute inset-0 p-2 content-center bg-[#00000085] hover:bg-[#00000095] text-sm lg:text-lg text-center font-medium shadow">{album.data.name}</div>
                             </a>
                     ))}
